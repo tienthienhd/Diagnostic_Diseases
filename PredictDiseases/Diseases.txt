@@ -1,0 +1,41 @@
+﻿(vertigo) Paroymsal  Positional Vertigo:chóng_mặt
+AIDS:hội_chứng_suy_giảm_miễn_dịch
+Acne:trứng_cá
+Alcoholic hepatitis:viêm_gan
+Allergy:dị_ứng
+Arthritis:Viêm_khớp
+Bronchial Asthma:suyễn_cuống_phổi
+Cervical spondylosis:thoái_hóa_đốt_sống_cổ
+Chicken pox:thủy_đậu
+Chronic cholestasis:ứ_mật_mãn_tính
+Common Cold:cảm_lạnh_thông_thường
+Dengue:bệnh_đanga
+Diabetes :bệnh_tiểu_đường
+Dimorphic hemmorhoids(piles):trĩ_ngoại
+Drug Reaction:phản_ứng_thuốc
+Fungal infection:nhiễm_nấm
+GERD:trào_ngược_dạ_dày_thực_quản
+Gastroenteritis:viêm_dạ_dày_ruột
+Heart attack:đau_tim
+Hepatitis B:Viêm_gan_B
+Hepatitis C:Viêm_gan_C
+Hepatitis D:Viêm_gan_D
+Hepatitis E:Viêm_gan_E
+Hypertension :cao_huyết_áp
+Hyperthyroidism:tăng_năng_tuyến_giáp
+Hypoglycemia:giảm_đường_huyết
+Hypothyroidism:tăng_năng_tuyến_giáp
+Impetigo:bỏng
+Jaundice:vàng_da
+Malaria:Bệnh_sốt_rét
+Migraine:đau_nửa_đầu
+Osteoarthristis:Viêm_xương_khớp
+Paralysis (brain hemorrhage):tê_liệt_xuất_huyết_não
+Peptic ulcer diseae:loét_dạ_dày_tá_tràng
+Pneumonia:Viêm_phổi
+Psoriasis:Bệnh_vảy_nến
+Tuberculosis:Bệnh_lao
+Typhoid:thương_hàn
+Urinary tract infection:Nhiễm_trùng_đường_tiết_liệu
+Varicose veins:Suy_tĩnh_mạch
+hepatitis A:Viêm_gan_A
