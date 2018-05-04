@@ -143,4 +143,6 @@ d = DiseasePredict()
 d.load_model()
 result = d.get_predict(symptoms)
 
-print(result)
+for i in range(len(result[0])):
+    print(i, result[0][i], result[1][i])
+
