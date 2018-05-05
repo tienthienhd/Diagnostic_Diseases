@@ -8,8 +8,8 @@
 	</button>
 	<div class="collapse navbar-collapse" id="collapse">
 		<ul class="navbar-nav">
-			<li class="nav-item"><a href="<?php echo base_url(); ?>/index.php/predictdiseases" class="nav-link text-white"  >Home</a></li>
-			<li class="nav-item"><a href="#" class="nav-link text-white" >Personal Information</a></li>
+			<li class="nav-item"><a href="<?php echo base_url(); ?>/index.php/predictdiseases" class="nav-link text-white btn-outline-danger"  >Home</a></li>
+			<li class="nav-item"><a href="#" class="nav-link text-white btn-outline-danger" >Help</a></li>
 			
 			
 		</ul>

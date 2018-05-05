@@ -20,7 +20,9 @@ class predictdiseases extends CI_Controller {
 		// echo "<pre>";
 		// var_dump($string);
 		// echo "</pre>";
-		$ketqua = array('diseases' => $string2, "symptoms" => $string1);
+		$user = false;
+
+		$ketqua = array('diseases' => $string2, "symptoms" => $string1, 'isLogin' => $user);
 		$this->load->view('predictdiseases_view',$ketqua);
 	}
 	public function result(){
@@ -41,11 +43,37 @@ class predictdiseases extends CI_Controller {
 			$output = array('result' => $output);
 			$this->load->view('success_view', $output);
 		} else {
-			echo $output;
+			foreach ($output as $value) {
+				echo $value . "<br/>";
+			}
 			echo "<br/><h2 style='background-color: red'>call failure</h2>";
 			echo $cmd;
 		}
 		
+	}
+	public function login(){
+		$email = $this->input->post('email');
+		$pass = $this->input->post('password');
+		$this->load->model('authentication_model');
+		$users = $this->authentication_model->getAllData();
+
+		$info = false;
+		foreach ($users as $user) {
+			if($user['email']==$email){
+				if($user['password']==$pass){
+					$info = $user;
+				}
+			}
+		}
+		$string1 = file_get_contents(base_url()."Symptom.txt");
+		$string1 = explode("\n", $string1);
+
+		$string2 = file_get_contents(base_url()."Diseases.txt");
+		$string2 = explode("\n", $string2);
+		
+
+		$ketqua = array('diseases' => $string2, "symptoms" => $string1, 'isLogin' => $info);
+		$this->load->view('predictdiseases_view',$ketqua);
 	}
 
 }

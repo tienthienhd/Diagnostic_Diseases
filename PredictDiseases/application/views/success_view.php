@@ -14,16 +14,38 @@
 </head>
 <body>
 	
-	<div class="container">
+	<div class="container-fluid">
 		
 		<?php require_once('header.php') ?>
-		<h2>Form show result</h2>
-		<ul>
-		<?php foreach ($result as $value): ?>
-			<li><?php var_dump($result) ?></li>
-		<?php endforeach ?>
-		</ul>
+		
+		
 	</div>
-
+	<div class="container">
+			<h2>Form show result</h2>
+			
+			<table class="table table-hover table-responsive">
+				<thead>
+					<th>STT</th>
+					<th>My Diseases</th>
+					<th>Precent Accurate</th>
+				</thead>
+				<tbody>
+					<?php foreach ($result as $value): ?>
+						<?php $list = explode(" ", $value); ?>
+						<tr>
+							<td><?= $list[0] ?></td>
+							<td><?php for($i=1 ;$i< sizeof($list)-1; $i++) {
+								echo $list[$i]. " ";
+							} ?></td>
+							<td><?= $list[sizeof($list)-1] ?></td>
+						</tr>
+					<?php endforeach ?>
+					
+					
+					
+				</tbody>
+				
+			</table>
+		</div>
 </body>
 </html>

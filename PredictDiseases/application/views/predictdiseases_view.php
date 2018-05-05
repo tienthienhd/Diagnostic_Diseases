@@ -14,32 +14,84 @@
 </head>
 <body>
 	
-	<div class="container">
+	<div class="container-fluid">
 		<div>
 			<div class="bg-info" style="text-align: right;">
-				<button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#login">Login</button>
-				&nbsp;&nbsp;&nbsp;
+				<?php if($isLogin!=false){ ?>
+					<button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#hello" style="padding: 10px;">Hello <?= $isLogin['name'] ?></button>
+					&nbsp;&nbsp;&nbsp;	
+				<?php }else{ ?>
+					<button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#login" style="padding: 10px;">Login</button>
+					&nbsp;&nbsp;&nbsp;		
+				<?php } ?>
 			</div>
+			<div id="hello" class="modal fade">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h4 class="modal-title text-xs-center">Information</h4>
+			            </div>
+			            <div class="modal-body">
+			                	<div class="form-group">
+			                        <label class="control-label">Tên</label>
+			                        <div>
+			                            <input type="text" class="form-control input-lg disable" name="name" value="<?= $isLogin['name'] ?>">
+			                        </div>
+			                    </div>
+			                    <div class="form-group">
+			                        <label class="control-label">Tuổi</label>
+			                        <div>
+			                            <input type="text" class="form-control input-lg disable" name="age" value="<?= $isLogin['age'] ?>">
+			                        </div>
+			                    </div>
+			                    <div class="form-group">
+			                        <label class="control-label">Chiều cao</label>
+			                        <div>
+			                            <input type="text" class="form-control input-lg disable" name="height" value="<?= $isLogin['height'] ?>">
+			                        </div>
+			                    </div>
+			                    <div class="form-group">
+			                        <label class="control-label">Cân nặng</label>
+			                        <div>
+			                            <input type="text" class="form-control input-lg disable" name="weight" value="<?= $isLogin['weight'] ?>">
+			                        </div>
+			                    </div>
+			                    <div class="form-group">
+			                        <label class="control-label">Công việc</label>
+			                        <div>
+			                            <input type="text" class="form-control input-lg disable" name="job" value="<?= $isLogin['job'] ?>">
+			                        </div>
+			                    </div>
+			                    
+			                    
+			                    <button type="Close" class="btn btn-outline-danger btn-block">Close</button>
+			                    
+			               
+			            </div>
+			        </div><!-- /.modal-content -->
+			    </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
 			<!-- The Modal -->
 			<div id="login" class="modal fade">
 			    <div class="modal-dialog">
 			        <div class="modal-content">
 			            <div class="modal-header">
-			                <h4 class="modal-title text-xs-center">Log in like a Boss</h4>
+			                <h4 class="modal-title text-xs-center">Form Log in</h4>
 			            </div>
 			            <div class="modal-body">
-			                <form role="form" method="POST" action="">
+			                <form role="form" method="POST" action="<?= base_url(); ?>/index.php/predictdiseases/login">
 			                    <input type="hidden" name="_token" value="">
 			                    <div class="form-group">
 			                        <label class="control-label">E-Mail Address</label>
 			                        <div>
-			                            <input type="email" class="form-control input-lg" name="email" value="">
+			                            <input type="text" class="form-control input-lg" name="email" value="">
 			                        </div>
 			                    </div>
 			                    <div class="form-group">
 			                        <label class="control-label">Password</label>
 			                        <div>
-			                            <input type="password" class="form-control input-lg" name="password">
+			                            <input type="text" class="form-control input-lg" name="password">
 			                        </div>
 			                    </div>
 			                    <div class="form-group">
@@ -66,9 +118,12 @@
 			    </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 		</div>
+		<script>
+			
+		</script>
 		<?php require_once('header.php') ?>
 		
-
+	</div>
 		<div class="container">
 			<h2>Detail information in each tabs</h2>
 			<ul class="nav nav-tabs" role="tablist">
@@ -104,7 +159,7 @@
 						</div>
 					</div><br/><br/>
 					
-					<table id="myTable" class="table">
+					<table id="myTable" class="table table-hover">
 						<thead>
 							<th>My symptoms</th>
 						</thead>
@@ -202,7 +257,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
 
 </body>
 </html>
