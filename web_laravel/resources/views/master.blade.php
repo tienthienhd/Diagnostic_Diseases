@@ -32,15 +32,11 @@
 				version    : 'v3.0'
 			});
 
-			FB.AppEvents.logPageView();
+			FB.AppEvents.logPageView();		
 
-
-			FB.getLoginStatus(function(r){
-				statusChangeCallback(response);
-			});
 		};
 
-
+		
 
 		(function(d, s, id){
 			var js, fjs = d.getElementsByTagName(s)[0];
@@ -50,20 +46,23 @@
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 
-		function statusChangeCallback(response){
-			if(response.status === 'connected'){
-				FB.api('/me', function(response) {
-					console.log('Successful login for: ' + response.name);
 
-					loadLogin(response.name);
-				});
-			}
+		function statusChangeCallback(){
+			FB.getLoginStatus(function(response){
+				if(response.status === 'connected'){
+					FB.api('/me', function(response) {
+						console.log('Successful login for: ' + response.name);
+
+						loadLogin(response.name);
+					});
+				}
+			});
 		}
 
-			function login() {
+		function login() {
 
-				FB.getLoginStatus(function(response) {
-					if(response.status === 'connected'){
+			FB.getLoginStatus(function(response) {
+				if(response.status === 'connected'){
 					// window.location.href = 'fbconnect.php';
 					FB.api('/me', function(response) {
 						console.log('Successful login for: ' + response.name);
@@ -84,49 +83,52 @@
 				}
 			});
 
-			}
+		}
 
-			function testAPI() {
-				console.log('Welcome!  Fetching your information.... ');
-				FB.api('/me', function(response) {
-					console.log('Successful login for: ' + response.name);
-					document.getElementById('status').innerHTML =
-					'Thanks for logging in, ' + response.name + '!';
-				});
-			}
+		function testAPI() {
+			console.log('Welcome!  Fetching your information.... ');
+			FB.api('/me', function(response) {
+				console.log('Successful login for: ' + response.name);
+				document.getElementById('status').innerHTML =
+				'Thanks for logging in, ' + response.name + '!';
+			});
+		}
 
-			function loadLogin(username){
+		function loadLogin(username){
+			var info_login = document.getElementById('info-login');
+			info_login.innerHTML = username;
+			var divLogin = document.getElementById("form-login");
+			divLogin.setAttribute('hidden', '');
+			var divLogout = document.getElementById("form-logout");
+			divLogout.removeAttribute('hidden');
+
+			document.getElementById('username').innerHTML = username;
+		}
+
+		function logout(){
+			FB.logout(function(response) {
 				var info_login = document.getElementById('info-login');
-				info_login.innerHTML = username;
+				info_login.innerHTML = "Login";
 				var divLogin = document.getElementById("form-login");
-				divLogin.setAttribute('hidden', '');
+				divLogin.removeAttribute('hidden');
 				var divLogout = document.getElementById("form-logout");
-				divLogout.removeAttribute('hidden');
+				divLogout.setAttribute('hidden','');
+				document.getElementById('username').innerHTML = "";
+			});
+		}
 
-				document.getElementById('username').innerHTML = username;
-			}
 
-			function logout(){
-				FB.logout(function(response) {
-					var info_login = document.getElementById('info-login');
-					info_login.innerHTML = "Login";
-					var divLogin = document.getElementById("form-login");
-					divLogin.removeAttribute('hidden');
-					var divLogout = document.getElementById("form-logout");
-					divLogout.setAttribute('hidden','');
-					document.getElementById('username').innerHTML = "";
-				});
-			}
-		</script>
+	</script>
 
 
 
-		@include('header')
 
-		<div class="container">
-			@yield('content')
-		</div>
+	@include('header')
 
-		@include('footer')
-	</body>
-	</html>
+	<div class="container">
+		@yield('content')
+	</div>
+
+	@include('footer')
+</body>
+</html>

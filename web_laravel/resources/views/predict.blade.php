@@ -176,6 +176,11 @@
 	</div>
 
 	<script type="text/javascript">
+
+		function getRequest(){
+			alert("Kết quả đã được lưu vào hệ thống. Kết quả sẽ được chuyên gia xử lý trong thời gian tới. Cảm ơn!");
+		}
+
 		function addSymptom(){
 			var input = document.getElementById("symptom").value;
 			if(input.length <= 0) return;
@@ -203,6 +208,11 @@
 					dataArr.push($(this).html());
 				});
 				console.log(dataArr);
+
+				if(dataArr.length < 4) {
+					alert("Số lượng triệu chứng không đủ để chuẩn đoán! Vui lòng nhập thêm.");
+					return;
+				}
 
 				$.ajaxSetup({
 					headers: {

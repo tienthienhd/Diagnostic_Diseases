@@ -70,7 +70,7 @@
 				<div class="clearfix"></div>
 				<div class="bot-border"></div>
 
-				<div class="col-sm-5 col-xs-6 tital " >Công việc hiện tại:</div><div class="col-sm-7"></div>
+				<div class="col-sm-5 col-xs-6 tital " >Công việc hiện tại:</div><div class="col-sm-7"> Sinh viên</div>
 
 
 
