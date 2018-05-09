@@ -1,0 +1,145 @@
+body{
+    /*background:url('http://www.wallpaperup.com/uploads/wallpapers/2012/10/21/20181/cad2441dd3252cf53f12154412286ba0.jpg');*/
+    /*background-color: #2589d5;*/
+    background-color: white;
+    padding:50px;
+}
+
+.navbar-inverse {
+    background-color: #40933b;
+    border-color: #40933b;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+.navbar-inverse .navbar-text {
+    color: #fff;
+}
+
+.inverse .navbar-nav .active a:hover{
+    color: blue;
+    background-color: #2cba3d;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #40933b;
+}
+
+.logo {
+    color: white;
+    font-family:beaver; 
+    font-weight: bold;
+    height: 50px;
+    font-size: 14px;
+}
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .help-block{
+    font-size:12px    
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0    
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
+
+
+
+/*============== content ==============*/
+.content .container .news{
+    float: left;
+    /*height: 100px;*/
+    width: 70%    ;
+}
+
+.content .container .category {
+    height: 100px;
+    width: 30%;
+    color: red;
+}
+
+.news .row {
+    clear: left;
+    background-color: white;
+    margin-bottom: 10px;
+    margin-right: 0px;
+}
+
+.picture {
+    float: left;
+}
+
+.picture img {
+    width: 200px;
+    height: 160px;
+}
+
+.news .row .title {
+    
+}
+
+.news .row .title .header {
+    float: left;
+    font-size: 28px;
+}
+
+.news .row .title .description{
+    
+}
+
+/*================ search =============*/
+.container .list-category {
+    float: left;
+    width: 30%;
+    height: 1000px;
+}
+
+.container .list-category {
+    float: left;
+    height: 1000px;
+    width: 70%;
+
+}

@@ -26,13 +26,13 @@ class DiseasePredict:
         return dataset
     
     def load_model(self):
-        with open('C:/Apache24/htdocs/PredictDiseases/AI/Symptoms.txt') as f:
+        with open('C:/usersetup/xampp/htdocs/Diagnostic_Diseases/PredictDiseases/AI/Symptoms.txt') as f:
             for line in f:
                 self.symptoms.append(line.strip())
                 
-        self.classifier = load_model('C:/Apache24/htdocs/PredictDiseases/AI/neuralnetwork2.h5')
+        self.classifier = load_model('C:/usersetup/xampp/htdocs/Diagnostic_Diseases/PredictDiseases/AI/neuralnetwork2.h5')
         self.standarded = 1
-        self.labelencoder_Y.classes_ = np.load('C:/Apache24/htdocs/PredictDiseases/AI/labelencoder_y.npy')
+        self.labelencoder_Y.classes_ = np.load('C:/usersetup/xampp/htdocs/Diagnostic_Diseases/PredictDiseases/AI/labelencoder_y.npy')
         
     
     def dataset_analysis(df):
@@ -144,6 +144,6 @@ d.load_model()
 result = d.get_predict(symptoms)
 
 for i in range(len(result[0])):
-    print(i, result[0][i], result[1][i])
+    print(result[0][i], result[1][i])
 
 

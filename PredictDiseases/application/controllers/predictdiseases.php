@@ -28,7 +28,7 @@ class predictdiseases extends CI_Controller {
 	public function result(){
 		$param = $this->input->post('param');
 		
-		$cmd = "C:/Anaconda3/python.exe C:/Apache24/htdocs/PredictDiseases/AI/DiseasePredict.py " . $param;
+		$cmd = "C:/ProgramData/Anaconda3/python.exe C:/usersetup/xampp/htdocs/Diagnostic_Diseases/PredictDiseases/AI/DiseasePredict.py " . $param;
 		
 		
 		exec($cmd, $output, $return);
