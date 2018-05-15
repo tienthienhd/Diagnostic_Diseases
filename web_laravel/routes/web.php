@@ -43,9 +43,6 @@ Route::get('/predict_disease', [
 	'uses'=>'MainController@getPredictResult'
 ]);
 
-// Route::get('/predict_disease', function(){
-// 	echo "dfa";
-// });
 
 Route::post('/predict_disease', [
 	'as'=>'disease_info',
@@ -58,4 +55,19 @@ Route::get('/account', [
 	'uses'=>'MainController@getAccount'
 ]);
 
+Route::get('savePredict', [
+	'as'=>'savePredict',
+	'uses'=>'MainController@savePredict'
+]);
+
+Route::get('expert', [
+	'as'=>'expert',
+	'uses'=>'MainController@getExpert'
+]);
+
+
+Route::get('expertDone', [
+	'as'=>'expertDone',
+	'uses'=>'MainController@expertDone'
+]);
 

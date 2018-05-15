@@ -1,6 +1,8 @@
 @extends('master')
 @section('content')
 <div class="news">
+
+            <h1 style="color: white">Tin tức</h1>
             <div class="row">
                 <a href="" class="picture"><img src="images/1.jpg"></a>
                 <div class="title">

@@ -1,14 +1,15 @@
 @extends('master')
 
 @section('content')
+
 <div id="Diagnostic" class="container tab-pane active"><br/>
 
 
 	<label for="brgy">Nhập các triệu chứng của bạn:</label>
-	<input  class="form-control" list="suggestions" id="symptom" type="text" name="diagnostic" placeholder="Triệu chứng">
+	<input  class="form-control" list="suggestions" id="symptom" type="text" name="diagnostic" placeholder="Triệu chứng" autocomplete="on">
 
 	<datalist id="suggestions">
-		<option value="itching"/>
+		<option value="itching" name="Ngua"/>
 		<option value="skin_rash"/>
 		<option value="nodal_skin_eruptions"/>
 		<option value="continuous_sneezing"/>
@@ -21,7 +22,7 @@
 		<option value="muscle_wasting"/>
 		<option value="vomiting"/>
 		<option value="burning_micturition"/>
-		<option value="spotting_ urination"/>
+		<option value="spotting_urination"/>
 		<option value="fatigue"/>
 		<option value="weight_gain"/>
 		<option value="anxiety"/>
@@ -177,8 +178,66 @@
 
 	<script type="text/javascript">
 
-		function getRequest(){
+		$('#symptom').keyup(function(event){
+			if(event.keyCode === 13){
+				addSymptom();
+			}
+		});
+
+		function getRequest(e){
+			var symptoms = [];
+			$("#tbody tr #symptom").each(function(){
+				symptoms.push($(this).html());
+			});
+			
+			var predictResult = [];
+			$("#tbody-result tr #disease").each(function(){
+				predictResult.push($(this).html());
+			})
+
+			var evaluations = [];
+			for (var i = predictResult.length - 1; i >= 0; i--) {
+				var radios = document.getElementsByName('evaluation' + i);
+				console.log(radios);
+				for(var j = 0; j < 2; j++){
+					if(radios[j].checked){
+						if(radios[j].value==="Yes"){
+							evaluations.push(1);
+						} else {
+							evaluations.push(0);
+						}
+					}
+				}
+			}
+
+			// console.log(symptoms);
+			// console.log(predictResult);
+
+
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			// e.preventDefault();
+
+
+			$.ajax({
+				type : "get",
+				url : "savePredict",
+				data : {"symptoms": symptoms, "diseases":predictResult, "evaluations" : evaluations},
+				success: function(data) {
+					console.log("type: " + typeof data + " data: "+ data + " length: " + data.length);
+					// display_result(data);
+
+				},
+				error : function() {
+					alert("error");
+				}
+			});
+
 			alert("Kết quả đã được lưu vào hệ thống. Kết quả sẽ được chuyên gia xử lý trong thời gian tới. Cảm ơn!");
+			location.reload();
 		}
 
 		function addSymptom(){
@@ -187,10 +246,17 @@
 			var table = document.getElementById("tbody");
 			var row = document.createElement("tr");
 			var td = document.createElement("td");
+			td.setAttribute('id', 'symptom');
+			var btnDelete = document.createElement("td");
+			// console.log(table.getElementsByTagName('tr').length);
+			var rowid = "symptom" + table.getElementsByTagName('tr').length;
+			row.setAttribute('id', rowid);
 
 
 			td.innerHTML = input;
+			btnDelete.innerHTML = '<a id="btn-delete" href="#" onClick="deleteSymptom(this)"><i class="fa fa-trash-o" style="color: red"></i></a>';
 			row.appendChild(td);
+			row.appendChild(btnDelete);
 			table.appendChild(row);
 
 			document.getElementById("symptom").value = "";
@@ -199,17 +265,22 @@
 	</script>
 
 	<script type="text/javascript">
+
+		function deleteSymptom(o){
+			var p = o.parentNode.parentNode;
+			p.parentNode.removeChild(p);
+		}
 		
 		$(document).ready(function(){
 			
 			$('#sendServer').click(function(e){
 				var dataArr = [];
-				$("#tbody tr td").each(function(){
+				$("#tbody tr #symptom").each(function(){
 					dataArr.push($(this).html());
 				});
 				console.log(dataArr);
 
-				if(dataArr.length < 4) {
+				if(dataArr.length < 3) {
 					alert("Số lượng triệu chứng không đủ để chuẩn đoán! Vui lòng nhập thêm.");
 					return;
 				}
@@ -227,8 +298,8 @@
 					url : "predict_disease",
 					data : "content="+dataArr,
 					success: function(data) {
-						console.log(data);
-						display_result(data['result']);
+						console.log("type: " + typeof data + " data: "+ data + " length: " + data.length);
+						display_result(data);
 
 					},
 					error : function() {
@@ -241,7 +312,11 @@
 
 	<script type="text/javascript">
 		function display_result(data) {
-			console.log(data);
+			//console.log(data);
+			if(data.length < 1){
+				alert("Hệ thống không có chuẩn đoán cho các triệu chứng này. Hệ thống sẽ cập nhật lại sau. Cảm ơn đã sử dụng dịch vụ của chúng tôi.");
+				return;
+			}
 			dict = preprocess_result(data);
 			var tmp = document.getElementById("Diagnostic");
 
@@ -263,10 +338,13 @@
 			var thead = document.createElement('thead');
 			var th_name = document.createElement('th');
 			var th_probably = document.createElement('th');
+			var th_evaluation = document.createElement('th');
 			th_name.innerHTML = "Tên bệnh";
 			th_probably.innerHTML = "Khả năng xảy ra";
+			th_evaluation.innerHTML = "Đánh giá";
 			thead.appendChild(th_name);
 			thead.appendChild(th_probably);
+			thead.appendChild(th_evaluation);
 			table.appendChild(thead);
 			
 
@@ -279,11 +357,21 @@
 				tbody.appendChild(row);
 
 				var td_name = document.createElement("td");
+				td_name.setAttribute('id', 'disease');
+
 				var td_probably = document.createElement("td");
+				td_probably.setAttribute('id', 'prob');
+
+				var td_evaluation = document.createElement("td");
+				td_evaluation.setAttribute('id', 'evaluation');
+
 				td_name.innerHTML = dict[i]['name'];
 				td_probably.innerHTML = dict[i]['probably'];
+				td_evaluation.innerHTML = '<input type="radio" name="evaluation'+i+'" value="Yes" checked>Đúng  <input type="radio" name="evaluation'+i+'" value="No">Sai';
+
 				row.appendChild(td_name);
 				row.appendChild(td_probably);
+				row.appendChild(td_evaluation);
 			}
 			
 
@@ -293,12 +381,18 @@
 		}
 
 		function preprocess_result(data) {
+			data = data.split("\r\n");
+			data = data.slice(0, data.length - 1);
+			console.log("data after split = " + data);
 			var result = [];
 			for (var i = data.length - 1; i >= 0; i--) {
 				var tmp = data[i];
+				// console.log("tmp = " + tmp);
 				var n = tmp.lastIndexOf(" ");
 				var disease = tmp.substring(0, n);
 				var prob = tmp.substring(n+1);
+				// console.log("disease = " + disease);
+				// console.log("prob = " + prob);
 
 				var c = "cao";
 				if(prob > 0.8){

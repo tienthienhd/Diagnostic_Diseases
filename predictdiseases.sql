@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2018 at 11:17 AM
+-- Generation Time: May 15, 2018 at 04:16 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -180,6 +180,19 @@ INSERT INTO `disease` (`id`, `title`, `content`, `idcat`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL,
+  `symptoms` text NOT NULL,
+  `diseases` text NOT NULL,
+  `evaluation` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `information`
 --
 
@@ -316,6 +329,12 @@ ALTER TABLE `disease`
   ADD KEY `ct_id_cat` (`idcat`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `information`
 --
 ALTER TABLE `information`
@@ -337,6 +356,12 @@ ALTER TABLE `symptoms`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `information`
